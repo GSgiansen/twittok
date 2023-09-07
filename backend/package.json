@@ -1,11 +1,18 @@
 {
+  "type": "module",
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.33.1"
+  },
+  "devDependencies": {
+    "supabase": "^1.93.0"
+  }
 }
