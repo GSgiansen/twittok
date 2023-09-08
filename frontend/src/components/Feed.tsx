@@ -1,5 +1,6 @@
 // components/Feed.tsx
 import React, { useState } from 'react';
+import { Button } from "@/components/ui/button";
 import Post from './Post';
 
 interface PostData {
@@ -7,6 +8,7 @@ interface PostData {
   imageUrl?: string;
   likes: number;
   likedByUser: boolean; 
+  username: string;
 }
 
 const Feed: React.FC = () => {
@@ -15,19 +17,22 @@ const Feed: React.FC = () => {
           text: "Placeholder 1 for feed",
           imageUrl: "https://via.placeholder.com/300x150?text=Placeholder+1",
           likes: 325,
-          likedByUser: false
+          likedByUser: false,
+          username: "User 1"
         },
         {
-          text: "Placeholder 2 for feed",
+          text: "Placeholder 2 for feed that is slightly longer",
           imageUrl: "https://via.placeholder.com/300x150?text=Placeholder+2",
           likes: 124,
-          likedByUser: false
+          likedByUser: false,
+          username: "User 2"
         },
         {
-          text: "Placeholder 3 for feed",
+          text: "Placeholder 3 for feed that is very long. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed justo tristique, ultricies nisl non, congue risus.",
           imageUrl: "https://via.placeholder.com/300x150?text=Placeholder+3",
           likes: 871,
-          likedByUser: false
+          likedByUser: false,
+          username: "User 3"
         }
       ]);
       
@@ -47,7 +52,7 @@ const Feed: React.FC = () => {
 
   const handleSubmit = () => {
     if (newPostText) {
-      setPosts([{ text: newPostText, imageUrl: newPostImage, likes: 0, likedByUser: false}, ...posts]);
+      setPosts([{ text: newPostText, imageUrl: newPostImage, likes: 0, likedByUser: false, username: "Guest"}, ...posts]);
       setNewPostText("");
       setNewPostImage("");
     }
@@ -55,23 +60,23 @@ const Feed: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto mt-10 bg-tiktok-black p-4 rounded-md">
-      <div className="mb-6">
+      <div className="grid w-full gap-2">
         <textarea
-          placeholder="What the hottest product?"
+          placeholder="What's the hottest product?"
           className="w-full p-2 rounded-md mb-2 bg-tiktok-red text-white"
           value={newPostText}
           onChange={(e) => setNewPostText(e.target.value)}
         />
         <input 
           type="text" 
-          placeholder="Image URL (optional)" 
+          placeholder="Link to product (optional)" 
           className="w-full p-2 rounded-md mb-2 bg-tiktok-aqua text-tiktok-black"
           value={newPostImage}
           onChange={(e) => setNewPostImage(e.target.value)}
         />
-        <button onClick={handleSubmit} className="bg-tiktok-red text-white p-2 rounded-md">
-          Post
-        </button>
+        <Button onClick={handleSubmit} className='bg-tiktok-red text-white mb-2'>
+            Post
+        </Button>
       </div>
       
       {posts.map((post, index) => (
