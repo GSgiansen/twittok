@@ -1,6 +1,7 @@
 // components/Feed.tsx
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
+import { FaFilter } from 'react-icons/fa';
 import Post from './Post';
 
 interface PostData {
@@ -15,21 +16,21 @@ const Feed: React.FC = () => {
     const [posts, setPosts] = useState<PostData[]>([
         {
           text: "Placeholder 1 for feed",
-          imageUrl: "https://via.placeholder.com/300x150?text=Placeholder+1",
+          imageUrl: "https://via.placeholder.com/300x150?text=Placeholder",
           likes: 325,
           likedByUser: false,
           username: "User 1"
         },
         {
           text: "Placeholder 2 for feed that is slightly longer",
-          imageUrl: "https://via.placeholder.com/300x150?text=Placeholder+2",
+          imageUrl: "https://via.placeholder.com/300x150?text=Placeholder",
           likes: 124,
           likedByUser: false,
           username: "User 2"
         },
         {
           text: "Placeholder 3 for feed that is very long. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed justo tristique, ultricies nisl non, congue risus.",
-          imageUrl: "https://via.placeholder.com/300x150?text=Placeholder+3",
+          imageUrl: "https://via.placeholder.com/300x150?text=Placeholder",
           likes: 871,
           likedByUser: false,
           username: "User 3"
@@ -58,6 +59,10 @@ const Feed: React.FC = () => {
     }
   };
 
+  const handleSentimentFilter = () => {
+    //Link the filter here
+  }
+
   return (
     <div className="max-w-2xl mx-auto mt-10 bg-tiktok-black p-4 rounded-md">
       <div className="grid w-full gap-2">
@@ -78,7 +83,9 @@ const Feed: React.FC = () => {
             Post
         </Button>
       </div>
-      
+      <div className="flex justify-end mb-4">
+                <FaFilter size={24} className="cursor-pointer text-tiktok-red"/>
+            </div>
       {posts.map((post, index) => (
         <Post key={index} {...post} onToggleLike={() => handleToggleLike(index)}/>
       ))}
