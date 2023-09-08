@@ -76,7 +76,7 @@ const Feed: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto rounded-md">
-      <div className="grid w-full gap-2">
+      <div className="grid w-full gap-2 py-2">
         <Textarea
           placeholder="What's the hottest product?"
           className="w-full p-2 rounded-md mb-2 text-white"
@@ -96,10 +96,6 @@ const Feed: React.FC = () => {
         >
           Post
         </Button>
-      </div>
-      <div className="flex justify-end mb-4">
-        <Button variant="outline" className="py-0">Filter</Button>
-        {/* <FaFilter size={24} className="cursor-pointer text-tiktok-red" /> */}
       </div>
       {posts.map((post, index) => (
         <Post
