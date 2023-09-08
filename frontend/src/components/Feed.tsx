@@ -24,7 +24,7 @@ const Feed: React.FC = () => {
     <div className="max-w-2xl mx-auto mt-10 bg-tiktok-black p-4 rounded-md">
       <div className="mb-6">
         <textarea
-          placeholder="What's on your mind?"
+          placeholder="What the hottest product?"
           className="w-full p-2 rounded-md mb-2 bg-tiktok-red text-white"
           value={newPostText}
           onChange={(e) => setNewPostText(e.target.value)}
