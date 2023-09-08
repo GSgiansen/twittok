@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -17,6 +18,9 @@ module.exports = {
     },
     extend: {
       colors: {
+        'tiktok-red': '#ff0050',
+        'tiktok-aqua': '#00f2ea',
+        'tiktok-black': '#000000',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

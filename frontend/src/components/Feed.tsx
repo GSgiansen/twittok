@@ -21,23 +21,23 @@ const Feed: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10">
+    <div className="max-w-2xl mx-auto mt-10 bg-tiktok-black p-4 rounded-md">
       <div className="mb-6">
         <textarea
-          placeholder="What's happening?"
-          className="w-full p-2 rounded-md mb-2"
+          placeholder="What's on your mind?"
+          className="w-full p-2 rounded-md mb-2 bg-tiktok-red text-white"
           value={newPostText}
           onChange={(e) => setNewPostText(e.target.value)}
         />
         <input 
           type="text" 
           placeholder="Image URL (optional)" 
-          className="w-full p-2 rounded-md mb-2"
+          className="w-full p-2 rounded-md mb-2 bg-tiktok-aqua text-tiktok-black"
           value={newPostImage}
           onChange={(e) => setNewPostImage(e.target.value)}
         />
-        <button onClick={handleSubmit} className="bg-blue-500 text-white p-2 rounded-md">
-          Tweet
+        <button onClick={handleSubmit} className="bg-tiktok-red text-white p-2 rounded-md">
+          Post
         </button>
       </div>
       

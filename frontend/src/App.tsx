@@ -4,7 +4,7 @@ import Feed from './components/Feed';
 
 const App: React.FC = () => {
   return (
-    <div className="bg-gray-100 min-h-screen p-6">
+    <div className="bg-tiktok-black min-h-screen p-6">
       <Feed />
     </div>
   );
