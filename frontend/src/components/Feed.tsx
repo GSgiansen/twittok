@@ -5,16 +5,49 @@ import Post from './Post';
 interface PostData {
   text: string;
   imageUrl?: string;
+  likes: number;
+  likedByUser: boolean; 
 }
 
 const Feed: React.FC = () => {
-  const [posts, setPosts] = useState<PostData[]>([]);
+    const [posts, setPosts] = useState<PostData[]>([
+        {
+          text: "Placeholder 1 for feed",
+          imageUrl: "https://via.placeholder.com/300x150?text=Placeholder+1",
+          likes: 325,
+          likedByUser: false
+        },
+        {
+          text: "Placeholder 2 for feed",
+          imageUrl: "https://via.placeholder.com/300x150?text=Placeholder+2",
+          likes: 124,
+          likedByUser: false
+        },
+        {
+          text: "Placeholder 3 for feed",
+          imageUrl: "https://via.placeholder.com/300x150?text=Placeholder+3",
+          likes: 871,
+          likedByUser: false
+        }
+      ]);
+      
   const [newPostText, setNewPostText] = useState<string>("");
   const [newPostImage, setNewPostImage] = useState<string>("");
 
+  const handleToggleLike = (index: number) => {
+    const updatedPosts = [...posts];
+    if (updatedPosts[index].likedByUser) {
+      updatedPosts[index].likes -= 1;
+    } else {
+      updatedPosts[index].likes += 1;
+    }
+    updatedPosts[index].likedByUser = !updatedPosts[index].likedByUser;
+    setPosts(updatedPosts);
+  };
+
   const handleSubmit = () => {
     if (newPostText) {
-      setPosts([{ text: newPostText, imageUrl: newPostImage }, ...posts]);
+      setPosts([{ text: newPostText, imageUrl: newPostImage, likes: 0, likedByUser: false}, ...posts]);
       setNewPostText("");
       setNewPostImage("");
     }
@@ -42,7 +75,7 @@ const Feed: React.FC = () => {
       </div>
       
       {posts.map((post, index) => (
-        <Post key={index} {...post} />
+        <Post key={index} {...post} onToggleLike={() => handleToggleLike(index)}/>
       ))}
     </div>
   );
