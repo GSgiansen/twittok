@@ -9,7 +9,7 @@ export interface ListingItemProps {
 const FlashSaleItem: FC<ListingItemProps> = ({ filepath, price }) => {
   return (
     <Card className="flex flex-col justify-between text-left w-[70px] p-1">
-      <img src={filepath} alt={filepath} height={60} width={60} />
+      <img src={filepath} alt={filepath} className="object-cover rounded-lg h-16 w-16" />
       <CardDescription className="font-medium text-xs">
         ${price}
       </CardDescription>

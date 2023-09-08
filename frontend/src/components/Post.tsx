@@ -1,6 +1,8 @@
 // components/Post.tsx
-import React from 'react';
-import { FaHeart, FaRegHeart, FaUserCircle } from 'react-icons/fa';
+import React from "react";
+import { FaHeart, FaRegHeart, FaUserCircle } from "react-icons/fa";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardTitle, CardDescription } from "./ui/card";
 
 interface PostProps {
   text: string;
@@ -11,27 +13,45 @@ interface PostProps {
   onToggleLike: () => void;
 }
 
-const Post: React.FC<PostProps> = ({ text, imageUrl, likes, likedByUser, username, onToggleLike }) => {
+const Post: React.FC<PostProps> = ({
+  text,
+  imageUrl,
+  likes,
+  likedByUser,
+  username,
+  onToggleLike,
+}) => {
   return (
-    <div className="p-4 border rounded-md mb-4 bg-white">
-      <div className="flex">
-        <FaUserCircle size={40} className="mr-3 text-gray-500 flex-shrink-0"/>
-        <div>
-          <p className="font-semibold">{username}</p>
-          <p className="mb-2">{text}</p>
-        </div>
-      </div>
-      {imageUrl && <img src={imageUrl} alt="Post" className="max-w-full rounded-md mt-3" />}
+    <Card className="p-4 border rounded-md mb-4">
+      <CardTitle className="flex items-center gap-4">
+        <Avatar>
+          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+        <div className="font-medium text-[1rem]">{username}</div>
+      </CardTitle>
+      <CardDescription className="mt-2 text-justify text-gray-200">
+        {text}
+      </CardDescription>
+      {imageUrl && (
+        <img src={imageUrl} alt="Post" className="rounded-lg mt-3 w-full" />
+      )}
       <div className="mt-2 flex items-center">
         {likedByUser ? (
-          <FaHeart onClick={onToggleLike} className="cursor-pointer mr-2 text-red-500" />
+          <FaHeart
+            onClick={onToggleLike}
+            className="cursor-pointer mr-2 text-red-500"
+          />
         ) : (
-          <FaRegHeart onClick={onToggleLike} className="cursor-pointer mr-2 text-gray-400" />
+          <FaRegHeart
+            onClick={onToggleLike}
+            className="cursor-pointer mr-2 text-gray-400"
+          />
         )}
         <span>{likes}</span>
       </div>
-    </div>
+    </Card>
   );
-}
+};
 
 export default Post;

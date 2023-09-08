@@ -25,7 +25,6 @@ const Main: FC<HomeProps> = () => {
         <TabsContent value="feed">
           <Feed />
         </TabsContent>
-        <TabsContent value="password">Change your password here.</TabsContent>
       </Tabs>
     </div>
   );

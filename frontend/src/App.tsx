@@ -1,10 +1,13 @@
 import "./App.css";
 import Main from "./components/Main";
+import { ThemeProvider } from "./components/theme-provider";
 
 function App() {
   return (
     <>
-      <Main />
+      <ThemeProvider defaultTheme="dark">
+        <Main />
+      </ThemeProvider>
     </>
   );
 }
