@@ -3,10 +3,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FC } from "react";
 import Home from "./home/Home";
 import Feed from "./Feed";
+import supabase from "@/supabaseClient";
 
 interface HomeProps {}
 
-const Main: FC<HomeProps> = () => {
+const Main: FC<HomeProps> = (session) => {
   return (
     <div className="flex flex-col min-h-screen gap-4">
       <Input />
@@ -26,6 +27,11 @@ const Main: FC<HomeProps> = () => {
           <Feed />
         </TabsContent>
       </Tabs>
+      <div>
+        <button className="button block" type="button" onClick={() => supabase.auth.signOut()}>
+          Sign Out
+        </button>
+      </div>
     </div>
   );
 };
