@@ -22,17 +22,22 @@ const Feed: React.FC = (session) => {
   const [posts, setPosts] = useState<PostData[]>(
     []
     );
-  const userEmail = session.session.session.user.email;
+  const [email, setEmail] = useState<string>("");
+  
+  
   const uuid = session.session.session.user.id;
+
+
   useEffect(() => {
       // Define a function to fetch posts
       const userEmail = session.session.session.user.email;
       const getPostsDataBase = async () => {
         try {
           let { data: products, error } = await supabase
-            .from('products')
-            .select('*');
-  
+          .from("products")
+          .select(
+            `id, user_seller, description, price, likes, quantity, profiles(id, username)`
+          );          
           if (error) {
             console.error('Error fetching data:', error.message);
           } else {
@@ -43,7 +48,7 @@ const Feed: React.FC = (session) => {
               imageUrl: product.description,
               likes: product.likes,
               likedByUser: false,
-              username: product.user_seller,
+              username: product.profiles.username,
               quantity: product.quantity,
             }));
   
@@ -51,6 +56,8 @@ const Feed: React.FC = (session) => {
               setPosts(newPosts);
             }
           }
+
+
         } catch (error) {
           console.error('Error fetching data:', error.message);
         }
@@ -58,28 +65,23 @@ const Feed: React.FC = (session) => {
       // Call the data fetching function when the component mounts
       getPostsDataBase();
     }, []);
+
   
-  // linking  the uuid to the email 
-  // const getEmailFromUid = async (uid: string) => {
-  //   console.log(uid)
-  //   try {
-  //     let { data: users, error } = await supabase.auth.getUser(uid);
-  //     console.log(users)
-      
-  //   if (error) {
-  //       console.error('Error fetching data:', error.message);
-  //     }
-  //   }
-  //   catch (error) {
-  //     console.error('Error fetching data:', error.message);
-  //   }
-
-  // }
-
 
   const [newPostText, setNewPostText] = useState<string>("");
   const [newPostImage, setNewPostImage] = useState<string>("");
   const [productNumber, setProductNumber] = useState<number>(0);
+
+  const getUsernameFromuuid = async (uuid: string) => { 
+    const {data: profiles, error} = await supabase.from("profiles").select("*").eq("id", uuid);
+    if (error) {
+      console.error('Error fetching data:', error.message);
+    } else {
+      return profiles[0].username;
+    }
+  }
+
+
 
   const handleToggleLike = (index: number) => {
     const updatedPosts = [...posts];
@@ -99,6 +101,7 @@ const Feed: React.FC = (session) => {
   const handleSubmit = async () => {
     if (newPostText) {
       const num = generatePostID();
+      const username = await getUsernameFromuuid(uuid);
       setPosts([
         {
           postID: num,
@@ -106,7 +109,7 @@ const Feed: React.FC = (session) => {
           imageUrl: newPostImage,
           likes: 0,
           likedByUser: false,
-          username: userEmail,
+          username: username,
           quantity: productNumber,
         },
         ...posts,
@@ -161,7 +164,7 @@ const Feed: React.FC = (session) => {
       </div>
       {posts.map((post, index) => (
         <Post
-          key={index}
+          key={post.postID}
           {...post}
           onToggleLike={() => handleToggleLike(index)}
         />
