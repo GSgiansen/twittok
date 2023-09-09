@@ -3,8 +3,10 @@ import React from "react";
 import { FaHeart, FaRegHeart, FaUserCircle } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardTitle, CardDescription } from "./ui/card";
+import Reviews from "./ui/reviews";
 
 interface PostProps {
+  postID : number;
   text: string;
   imageUrl?: string;
   likes: number;
@@ -15,6 +17,7 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({
+  postID,
   text,
   imageUrl,
   likes,
@@ -53,6 +56,10 @@ const Post: React.FC<PostProps> = ({
       />
     )}
     <span>{likes}</span>
+  </div>
+
+  <div className="mt-2">
+    <Reviews productId ={postID}/>
   </div>
 
   <div className="mr-2 flex items-center">

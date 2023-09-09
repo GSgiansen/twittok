@@ -10,6 +10,7 @@ function AuthComponent() {
   const handleLogin = async () => {
     try {
       const { user, error } = await supabase.auth.signInWithPassword({ email, password })
+    
       if (error) {
         setError(error.message);
       } else {
@@ -25,7 +26,11 @@ function AuthComponent() {
   const handleSignup = async () => {
     try {
       const { user, error } = await supabase.auth.signUp({ email, password });
-      if (error) {
+      const res = await supabase.auth.getSession();
+      console.log("uuid is ", res)
+      const uuid = res.data.session.user.id;
+      const {err} = await supabase.from("profiles").insert({id: uuid, email: email, username: "gians"})
+      if (error || err) {
         setError(error.message);
       } else {
         console.log('Signed up as:', user);
@@ -53,7 +58,7 @@ function AuthComponent() {
         <input
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}s
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <div>
