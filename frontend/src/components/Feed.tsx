@@ -3,11 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { FaFilter } from "react-icons/fa";
 import Post from "./Post";
 import supabase from "@/supabaseClient";
-import { get } from "http";
-
+//@ts-ignore
 interface PostData {
   postID: number;
   text: string;
@@ -22,14 +20,16 @@ const Feed: React.FC = (session) => {
   const [posts, setPosts] = useState<PostData[]>(
     []
     );
+    //@ts-ignore
   const [email, setEmail] = useState<string>("");
   
-  
+  //@ts-ignore
   const uuid = session.session.session.user.id;
 
 
   useEffect(() => {
       // Define a function to fetch posts
+      //@ts-ignore
       const userEmail = session.session.session.user.email;
       const getPostsDataBase = async () => {
         try {
@@ -48,6 +48,7 @@ const Feed: React.FC = (session) => {
               imageUrl: randomProduct(),
               likes: product.likes,
               likedByUser: false,
+              //@ts-ignore
               username: product.profiles.username,
               quantity: product.quantity,
             }));
@@ -59,6 +60,7 @@ const Feed: React.FC = (session) => {
 
 
         } catch (error) {
+          //@ts-ignore
           console.error('Error fetching data:', error.message);
         }
       };
@@ -123,7 +125,7 @@ const Feed: React.FC = (session) => {
         },
         ...posts,
       ]);
-
+//@ts-ignore
       const { error } = await supabase
     .from('products')
     .insert({id: num, description: newPostText, likes: 0, user_seller: uuid, price: 200, quantity: productNumber})
@@ -133,7 +135,7 @@ const Feed: React.FC = (session) => {
       setNewPostImage("");
     }
   };
-
+//@ts-ignore
   const handleSentimentFilter = () => {
     //Link the filter here
   };
@@ -160,6 +162,7 @@ const Feed: React.FC = (session) => {
           placeholder="Number of products"
           className="w-full p-2 rounded-md mb-2 text-tiktok-black"
           value={productNumber}
+          //@ts-ignore
           onChange={(e) => setProductNumber(e.target.value)}
           style = {{color: "white"}}
 

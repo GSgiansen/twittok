@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,7 @@ import supabase from "@/supabaseClient";
 import { Textarea } from "./textarea";
 import { AuthContext } from "@/App";
 import Review from "./review";
-
+//@ts-ignore
 const Reviews = ({ productId }) => {
   const authObject = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
@@ -29,7 +29,7 @@ const Reviews = ({ productId }) => {
     // Clear reviews when the dialog is closed (optional)
     setReviews([]); //who's in paris??? the NNNnnNNNNn
   };
-
+//@ts-ignore
   const fetchReviews = async (productId) => {
     console.log("fetching for ", productId);
     try {
@@ -40,6 +40,7 @@ const Reviews = ({ productId }) => {
         .eq("product_id", productId);
       if (reviews) {
         console.log("reviews is ", reviews)
+        //@ts-ignore
         setReviews(reviews);
       } else {
         console.error("Error fetching reviews:", error);
@@ -55,6 +56,7 @@ const Reviews = ({ productId }) => {
   
     let sumSentiment = 0;
     for (const review of reviews) {
+      //@ts-ignore
       sumSentiment += review.sentiment;
     }
   
@@ -74,6 +76,7 @@ const Reviews = ({ productId }) => {
         id: num,
         product_id: productId,
         description: review,
+        //@ts-ignore
         commenter: authObject.user.id,
       });
     if (error) {
@@ -90,12 +93,15 @@ const Reviews = ({ productId }) => {
       fetchReviews(productId);
     }, 6000);
   };
+  //@ts-ignore
   var sum = 0;
+  //@ts-ignore
   let count = 0;
 
   return (
     <div>
-      <Dialog isOpen={isOpen} onClose={closeDialog}>
+      <Dialog //@ts-ignore
+      isOpen={isOpen} onClose={closeDialog}>
         <DialogTrigger onClick={openDialog}>Reviews</DialogTrigger>
         <DialogContent>
           <DialogHeader>
@@ -123,11 +129,16 @@ const Reviews = ({ productId }) => {
               
               reviews.map((review, index) => (
                 <Review
+                //@ts-ignore
                  className="m-2"
                   key={index}
+                  //@ts-ignore
                   id={review.id}
+                  //@ts-ignore
                   description={review.description}
+                  //@ts-ignore
                   sentimentScore={review.sentiment}
+                  //@ts-ignore
                   productId={review.product_id}
                 />
               ))

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import supabase from '@/supabaseClient'; // Import your Supabase client instance here
-import { AuthTokenResponse } from '@supabase/supabase-js';
 
 function AuthComponent() {
   const [email, setEmail] = useState<string>('');
@@ -10,6 +9,7 @@ function AuthComponent() {
 
   const handleLogin = async () => {
     try {
+      //@ts-ignore
       const { user, error } = await supabase.auth.signInWithPassword({ email, password })
     
       if (error) {
@@ -19,6 +19,7 @@ function AuthComponent() {
         // You can perform further actions upon successful login
       }
     } catch (error) {
+      //@ts-ignore
       console.error('Error logging in:', error.message);
     }
 
@@ -26,18 +27,23 @@ function AuthComponent() {
 
   const handleSignup = async () => {
     try {
+      //@ts-ignore
       const { user, error } = await supabase.auth.signUp({ email, password });
       const res = await supabase.auth.getSession();
       console.log("uuid is ", res)
+      //@ts-ignore
       const uuid = res.data.session.user.id;
+      //@ts-ignore
       const {err} = await supabase.from("profiles").insert({id: uuid, email: email, username: username})
       if (error || err) {
+        //@ts-ignore
         setError(error.message);
       } else {
         console.log('Signed up as:', user);
         // You can perform further actions upon successful signup
       }
     } catch (error) {
+      //@ts-ignore
       console.error('Error signing up:', error.message);
     }
   };

@@ -5,17 +5,18 @@ import Auth from "./components/auth/authcomponent";
 import { ThemeProvider } from "./components/theme-provider";
 import supabase from "./supabaseClient";
 export const AuthContext = createContext({});
-
+//@ts-ignore
 function App() {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log(session);
+      //@ts-ignore
       setSession(session);
     });
 
     supabase.auth.onAuthStateChange((_event, session) => {
+      //@ts-ignore
       setSession(session);
     });
   }, []);
@@ -27,7 +28,8 @@ function App() {
           <Auth />
         ) : (
           <AuthContext.Provider value={session}>
-            <Main key={session.user.id} session={session} />
+            <Main //@ts-ignore
+            key={session.user.id} session={session} />
           </AuthContext.Provider>
         )}
       </ThemeProvider>

@@ -1,5 +1,5 @@
 import React from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 
 interface UserPostProps {
   description: string;

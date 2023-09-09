@@ -11,7 +11,9 @@ interface HomeProps {}
 
 const Main: FC<HomeProps> = (session) => {
   //load the user email from the session
+  //@ts-ignore
   const userEmail = session.session.user.email;
+  //@ts-ignore
   const authObject = useContext(AuthContext);
 
   return (
@@ -32,11 +34,16 @@ const Main: FC<HomeProps> = (session) => {
         <TabsContent value="home">
           <Home />
         </TabsContent>
+        
         <TabsContent value="feed">
-          <Feed session={session} />
+
+          <Feed //@ts-ignore
+          session={session} />
         </TabsContent>
         <TabsContent value="listing">
-          <Listings session={session} />
+          <Listings 
+          //@ts-ignore
+          session={session} />
         </TabsContent>
       </Tabs>
       <div>

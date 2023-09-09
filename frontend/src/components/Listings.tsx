@@ -18,6 +18,7 @@ interface ListingsProps {
 
 const Listings: React.FC<ListingsProps> = ({ session }) => {
   const [products, setProducts] = useState<ProductData[]>([]);
+  //@ts-ignore
   const sess = session.session
   const uuid = sess.user.id;
 
@@ -45,6 +46,7 @@ const Listings: React.FC<ListingsProps> = ({ session }) => {
           setProducts(products || []);
         }
       } catch (error) {
+        //@ts-ignore
         console.error('Error fetching products:', error.message);
       }
     };

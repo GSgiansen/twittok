@@ -1,6 +1,6 @@
 // components/Post.tsx
 import React from "react";
-import { FaHeart, FaRegHeart, FaUserCircle } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardTitle, CardDescription } from "./ui/card";
 import Reviews from "./ui/reviews";
