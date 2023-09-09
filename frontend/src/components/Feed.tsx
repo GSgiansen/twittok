@@ -24,8 +24,10 @@ const Feed: React.FC = (session) => {
     );
   const [email, setEmail] = useState<string>("");
   
-  const userEmail = session.session.session.user.email;
+  
   const uuid = session.session.session.user.id;
+
+
   useEffect(() => {
       // Define a function to fetch posts
       const userEmail = session.session.session.user.email;
@@ -66,11 +68,20 @@ const Feed: React.FC = (session) => {
 
   
 
-
-
   const [newPostText, setNewPostText] = useState<string>("");
   const [newPostImage, setNewPostImage] = useState<string>("");
   const [productNumber, setProductNumber] = useState<number>(0);
+
+  const getUsernameFromuuid = async (uuid: string) => { 
+    const {data: profiles, error} = await supabase.from("profiles").select("*").eq("id", uuid);
+    if (error) {
+      console.error('Error fetching data:', error.message);
+    } else {
+      return profiles[0].username;
+    }
+  }
+
+
 
   const handleToggleLike = (index: number) => {
     const updatedPosts = [...posts];
@@ -90,6 +101,7 @@ const Feed: React.FC = (session) => {
   const handleSubmit = async () => {
     if (newPostText) {
       const num = generatePostID();
+      const username = await getUsernameFromuuid(uuid);
       setPosts([
         {
           postID: num,
@@ -97,7 +109,7 @@ const Feed: React.FC = (session) => {
           imageUrl: newPostImage,
           likes: 0,
           likedByUser: false,
-          username: userEmail,
+          username: username,
           quantity: productNumber,
         },
         ...posts,

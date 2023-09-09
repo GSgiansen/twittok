@@ -5,6 +5,7 @@ import { AuthTokenResponse } from '@supabase/supabase-js';
 function AuthComponent() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
@@ -29,7 +30,7 @@ function AuthComponent() {
       const res = await supabase.auth.getSession();
       console.log("uuid is ", res)
       const uuid = res.data.session.user.id;
-      const {err} = await supabase.from("profiles").insert({id: uuid, email: email, username: "gians"})
+      const {err} = await supabase.from("profiles").insert({id: uuid, email: email, username: username})
       if (error || err) {
         setError(error.message);
       } else {
@@ -46,6 +47,14 @@ function AuthComponent() {
       <h1>Authentication</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <div>
+        <label>Username</label>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+      <div>
         <label>Email:</label>
         <input
           type="email"
@@ -53,6 +62,7 @@ function AuthComponent() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
+      
       <div>
         <label>Password:</label>
         <input
