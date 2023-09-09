@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Home from "./home/Home";
 import Feed from "./Feed";
 import supabase from "@/supabaseClient";
@@ -8,6 +8,11 @@ import supabase from "@/supabaseClient";
 interface HomeProps {}
 
 const Main: FC<HomeProps> = (session) => {
+
+  //load the user email from the session
+  const userEmail = session.session.user.email;
+
+
   return (
     <div className="flex flex-col min-h-screen gap-4">
       <Input />
@@ -24,7 +29,7 @@ const Main: FC<HomeProps> = (session) => {
           <Home />
         </TabsContent>
         <TabsContent value="feed">
-          <Feed />
+          <Feed session={session}/>
         </TabsContent>
       </Tabs>
       <div>

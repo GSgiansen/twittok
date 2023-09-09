@@ -19,6 +19,7 @@ function AuthComponent() {
     } catch (error) {
       console.error('Error logging in:', error.message);
     }
+
   };
 
   const handleSignup = async () => {

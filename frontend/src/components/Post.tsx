@@ -11,6 +11,7 @@ interface PostProps {
   likedByUser: boolean;
   username: string;
   onToggleLike: () => void;
+  quantity: number;
 }
 
 const Post: React.FC<PostProps> = ({
@@ -20,6 +21,8 @@ const Post: React.FC<PostProps> = ({
   likedByUser,
   username,
   onToggleLike,
+  quantity
+
 }) => {
   return (
     <Card className="p-4 border rounded-md mb-4">
@@ -36,21 +39,30 @@ const Post: React.FC<PostProps> = ({
       {imageUrl && (
         <img src={imageUrl} alt="Post" className="rounded-lg mt-3 w-full" />
       )}
-      <div className="mt-2 flex items-center">
-        {likedByUser ? (
-          <FaHeart
-            onClick={onToggleLike}
-            className="cursor-pointer mr-2 text-red-500"
-          />
-        ) : (
-          <FaRegHeart
-            onClick={onToggleLike}
-            className="cursor-pointer mr-2 text-gray-400"
-          />
-        )}
-        <span>{likes}</span>
-      </div>
+      <div className="mt-2 flex items-center justify-between">
+  <div className="flex items-center">
+    {likedByUser ? (
+      <FaHeart
+        onClick={onToggleLike}
+        className="cursor-pointer mr-2 text-red-500"
+      />
+    ) : (
+      <FaRegHeart
+        onClick={onToggleLike}
+        className="cursor-pointer mr-2 text-gray-400"
+      />
+    )}
+    <span>{likes}</span>
+  </div>
+
+  <div className="mr-2 flex items-center">
+    <span className="mr-2">Quantity:</span>
+    <span>{quantity}</span>
+  </div>
+</div>
+
     </Card>
+
   );
 };
 
