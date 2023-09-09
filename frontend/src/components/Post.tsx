@@ -6,7 +6,7 @@ import { Card, CardTitle, CardDescription } from "./ui/card";
 import Reviews from "./ui/reviews";
 
 interface PostProps {
-  postID : number;
+  postID: number;
   text: string;
   imageUrl?: string;
   likes: number;
@@ -24,8 +24,7 @@ const Post: React.FC<PostProps> = ({
   likedByUser,
   username,
   onToggleLike,
-  quantity
-
+  quantity,
 }) => {
   return (
     <Card className="p-4 border rounded-md mb-4">
@@ -40,36 +39,40 @@ const Post: React.FC<PostProps> = ({
         {text}
       </CardDescription>
       {imageUrl && (
-        <img src={imageUrl} alt="Post" className="rounded-lg mt-3 w-full" />
+        <div className="flex items-center justify-center">
+        <img
+          src={imageUrl}
+          alt="Post"
+          className="rounded-lg mt-3 h-32 w-32 flex items-center justify-center"
+        />
+        </div>
       )}
-      <div className="mt-2 flex items-center justify-between">
-  <div className="flex items-center">
-    {likedByUser ? (
-      <FaHeart
-        onClick={onToggleLike}
-        className="cursor-pointer mr-2 text-red-500"
-      />
-    ) : (
-      <FaRegHeart
-        onClick={onToggleLike}
-        className="cursor-pointer mr-2 text-gray-400"
-      />
-    )}
-    <span>{likes}</span>
-  </div>
+      <div className="mt-2 flex justify-between">
+        <div className="flex items-center">
+          {likedByUser ? (
+            <FaHeart
+              onClick={onToggleLike}
+              className="cursor-pointer mr-2 text-red-500"
+            />
+          ) : (
+            <FaRegHeart
+              onClick={onToggleLike}
+              className="cursor-pointer mr-2 text-gray-400"
+            />
+          )}
+          <span>{likes}</span>
+        </div>
 
-  <div className="mt-2">
-    <Reviews productId ={postID}/>
-  </div>
+        <div className="mt-2 ml-14">
+          <Reviews productId={postID} />
+        </div>
 
-  <div className="mr-2 flex items-center">
-    <span className="mr-2">Quantity:</span>
-    <span>{quantity}</span>
-  </div>
-</div>
-
+        <div className="mr-2 flex items-center">
+          <span className="mr-2">Quantity:</span>
+          <span>{quantity}</span>
+        </div>
+      </div>
     </Card>
-
   );
 };
 

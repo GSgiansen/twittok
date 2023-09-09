@@ -45,7 +45,7 @@ const Feed: React.FC = (session) => {
             const newPosts = products?.map((product) => ({
               postID: product.id,
               text: product.description,
-              imageUrl: product.description,
+              imageUrl: randomProduct(),
               likes: product.likes,
               likedByUser: false,
               username: product.profiles.username,
@@ -93,6 +93,15 @@ const Feed: React.FC = (session) => {
     updatedPosts[index].likedByUser = !updatedPosts[index].likedByUser;
     setPosts(updatedPosts);
   };
+
+  const randomProduct = () => {
+    // choose from the 5 assets loaded alr
+    // return the product name
+    const num = Math.floor(Math.random() * 5);
+    const products = ["public/airpods.jpeg", "public/airpods_max.jpeg", 
+    "public/beats.jpeg", "beats.jpeg", "public/xm5.jpeg"];
+    return products[num];
+  }
 
   const generatePostID = () => {
     return Math.floor(Math.random() * 1000000);
