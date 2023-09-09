@@ -4,6 +4,7 @@ import { FC, useEffect } from "react";
 import Home from "./home/Home";
 import Feed from "./Feed";
 import supabase from "@/supabaseClient";
+import Listings from "./Listings";
 
 interface HomeProps {}
 
@@ -24,12 +25,18 @@ const Main: FC<HomeProps> = (session) => {
           <TabsTrigger className="w-1/2" value="feed">
             Feed
           </TabsTrigger>
+          <TabsTrigger className="w-1/2" value="listing">
+            Listings
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="home">
           <Home />
         </TabsContent>
         <TabsContent value="feed">
           <Feed session={session}/>
+        </TabsContent>
+        <TabsContent value="listing">
+          <Listings session={session}/>
         </TabsContent>
       </Tabs>
       <div>
