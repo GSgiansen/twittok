@@ -4,4 +4,4 @@ A Twitter-feed inspired TikTok e-commerce page, utilizing machine learning for s
 
 > `npm install`
 
-in both root as well as /frontend
+in both root as well as /frontend.
