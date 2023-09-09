@@ -5,6 +5,7 @@ interface UserPostProps {
   description: string;
   price: number;
   quantity: number;
+  imageUrl?: string;
   // Add other product properties as needed
 }
 
@@ -12,6 +13,7 @@ const UserPost: React.FC<UserPostProps> = ({
   description,
   price,
   quantity,
+  imageUrl,
 }) => {
   return (
     <div className="product-card p-4 border rounded-md mb-4">
@@ -24,10 +26,16 @@ const UserPost: React.FC<UserPostProps> = ({
           />
           <span>0</span>
         </div>
+        <img
+          src={imageUrl}
+          alt="Post"
+          className="rounded-lg mt-3 ml-40 h-32 w-32 flex items-center justify-center"
+        />
         <div className="mr-2 flex items-center">
-          <span className="mr-2">Price: ${price}</span>
+          <span className="mr-2 ml-3 text-red-500">Price: ${price}</span>
           <span>Quantity: {quantity}</span>
         </div>
+
       </div>
     </div>
   );

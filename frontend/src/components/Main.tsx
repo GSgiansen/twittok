@@ -13,7 +13,6 @@ const Main: FC<HomeProps> = (session) => {
   //load the user email from the session
   const userEmail = session.session.user.email;
   const authObject = useContext(AuthContext);
-  console.log("hello", authObject);
 
   return (
     <div className="flex flex-col min-h-screen gap-4">

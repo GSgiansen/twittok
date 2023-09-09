@@ -8,6 +8,7 @@ interface ProductData {
   description: string;
   price: number;
   quantity: number;
+  imageUrl: string;
   // Add other product properties as needed
 }
 
@@ -19,7 +20,15 @@ const Listings: React.FC<ListingsProps> = ({ session }) => {
   const [products, setProducts] = useState<ProductData[]>([]);
   const sess = session.session
   const uuid = sess.user.id;
-  console.log(uuid)
+
+  const randomProduct = () => {
+    // choose from the 5 assets loaded alr
+    // return the product name
+    const num = Math.floor(Math.random() * 5);
+    const products = ["public/airpods.jpeg", "public/airpods_max.jpeg", 
+    "public/beats.jpeg", "beats.jpeg", "public/xm5.jpeg"];
+    return products[num];
+  }
 
   useEffect(() => {
     // Define a function to fetch products created by the current user session
@@ -54,11 +63,13 @@ const Listings: React.FC<ListingsProps> = ({ session }) => {
       ) : 
       (
         products.map((product) => (
+          
           <UserPost
             key={product.id}
             description={product.description}
             price={product.price}
             quantity={product.quantity}
+            imageUrl={randomProduct()}
           />
         ))
       )

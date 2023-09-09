@@ -70,7 +70,7 @@ const Feed: React.FC = (session) => {
 
   const [newPostText, setNewPostText] = useState<string>("");
   const [newPostImage, setNewPostImage] = useState<string>("");
-  const [productNumber, setProductNumber] = useState<number>(0);
+  const [productNumber, setProductNumber] = useState<number>(1);
 
   const getUsernameFromuuid = async (uuid: string) => { 
     const {data: profiles, error} = await supabase.from("profiles").select("*").eq("id", uuid);
@@ -115,7 +115,7 @@ const Feed: React.FC = (session) => {
         {
           postID: num,
           text: newPostText,
-          imageUrl: newPostImage,
+          imageUrl: randomProduct(),
           likes: 0,
           likedByUser: false,
           username: username,
