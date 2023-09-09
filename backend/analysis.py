@@ -2,9 +2,12 @@
 # to run, first run source pyenv/bin/activate in the home directory
 # to stop runnning run pyenv/bin/deactivate
 
+from flask import Flask
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 import ssl
+
+app = Flask(__name__)
 
 try:
     _create_unverified_https_context = ssl._create_unverified_context
@@ -16,12 +19,10 @@ else:
 nltk.download('vader_lexicon')
 sid = SentimentIntensityAnalyzer()
 
+@app.route('/analysis/<text>')
 def sentiment_analysis(text):
     scores = sid.polarity_scores(text)
-    return scores
+    return scores['compound'] # compound score is the overall sentiment
 
-def test():
-    text = "this app is disgusting."
-    print(sentiment_analysis(text))
-
-test()
+if __name__ == '__main__':
+    app.run()
