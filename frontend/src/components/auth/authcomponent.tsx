@@ -43,37 +43,50 @@ function AuthComponent() {
   };
 
   return (
-    <div>
-      <h1>Authentication</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div>
-        <label>Username</label>
+    <div className='flex flex-col justify-center h-screen'>
+      <h1 className="mb-4 text-2xl font-bold">Log in to TikTok</h1>
+      {error && <p className="text-red-500">{error}</p>}
+      <div className="mb-4">
+        <label className="block mb-2 text-left font-medium">Username:</label>
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          className="w-full px-3 py-2 border rounded bg-white text-black"
         />
       </div>
-      <div>
-        <label>Email:</label>
+      <div className="mb-4">
+        <label className="block mb-2 text-left font-medium">Email:</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-3 py-2 border rounded bg-white text-black"
         />
       </div>
       
-      <div>
-        <label>Password:</label>
+      <div className="mb-4">
+        <label className="block mb-2 text-left font-medium">Password:</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="w-full px-3 py-2 border rounded bg-white text-black"
         />
       </div>
-      <div>
-        <button onClick={handleLogin}>Login</button>
-        <button onClick={handleSignup}>Signup</button>
+      <div className="flex mt-4">
+        <button 
+          onClick={handleLogin}
+          className="w-1/2 mr-2 px-3 py-2 bg-tiktok-red text-white rounded-3xl font-medium"
+        >
+          Log in
+        </button>
+        <button 
+          onClick={handleSignup}
+          className="w-1/2 px-3 py-2 bg-tiktok-red text-white rounded-3xl font-medium"
+        >
+          Sign up
+        </button>
       </div>
     </div>
   );
